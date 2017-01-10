@@ -1,0 +1,27 @@
+<h2>Locations</h2>
+<div>
+  <label>Location name:</label> <input #locName />
+  <button (click)="add(locName.value); locName.value=''">
+    Add Location
+  </button>
+</div>
+<ul class="heroes">
+  <li *ngFor="let loc of locations" (click)="onSelect(loc)" [class.selected]="loc === selectedLoc">
+    <span class="badge">{{loc.ID}}</span>
+    <span>{{loc.Name}}</span>
+    <button class="delete" (click)="delete(loc); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+
+<div *ngIf="selectedLoc">
+  <h2>{{selectedLoc.Name}} details!</h2>
+  <div>
+    <label>id: </label>{{selectedLoc.ID}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="selectedLoc.Name" placeholder="name" />
+   </div>
+  <button (click)="edit(selectedLoc)">Save</button>
+</div>
+
+
