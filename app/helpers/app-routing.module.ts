@@ -11,13 +11,13 @@ import { HomeComponent }  from '../components/home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent,
+  //{ path: 'register', component: RegisterComponent },
+  { path: 'home/:username/:role', component: HomeComponent,
     children: [
-      { path: '', redirectTo: 'assign-patient', pathMatch: 'full' },
-      { path: 'assign-patient',  component: AssignPatientComponent },
-      { path: 'patient', component: PatientComponent },
-      { path: 'location', component: LocationComponent },
+     // { path: '', redirectTo: 'assign-patient', pathMatch: 'full' }
+      { path: 'user-register',  component: RegisterComponent },
+   //   { path: 'patient', component: PatientComponent },
+  //    { path: 'location', component: LocationComponent },
     ]
   }
 ];

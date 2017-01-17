@@ -9,16 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var login_service_1 = require('../services/login.service');
+var http_interceptor_1 = require('../helpers/http-interceptor');
+var router_1 = require('@angular/router');
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(router, loginService) {
+        this.router = router;
+        this.loginService = loginService;
     }
+    LoginComponent.prototype.login = function (uname, pwd) {
+        var _this = this;
+        if (uname.length != 0 && pwd.length != 0) {
+            this.loginService.authenticate(uname, pwd).subscribe(function (res) {
+                if (res.json()) {
+                    _this.router.navigate(['\home', res.json().fullname, res.json().role]);
+                }
+                else {
+                    _this.errorMsg = 'Username or password is invalid';
+                }
+            });
+        }
+    };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'app-login',
-            templateUrl: '../views/partials/login.html'
+            templateUrl: '../views/partials/login.html',
+            styleUrls: ['../styles/css/login.css'],
+            providers: [login_service_1.LoginService, http_interceptor_1.HttpInterceptor]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router, login_service_1.LoginService])
     ], LoginComponent);
     return LoginComponent;
 }());

@@ -9,16 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var user_register_service_1 = require('../services/user-register.service');
+var http_interceptor_1 = require('../helpers/http-interceptor');
 var RegisterComponent = (function () {
-    function RegisterComponent() {
+    function RegisterComponent(registerService) {
+        this.registerService = registerService;
+        this.tempUser = {
+            userid: '',
+            fullname: '',
+            password: '',
+            role: ''
+        };
+        this.successMsg = false;
+        this.errorMsg = false;
     }
+    RegisterComponent.prototype.addUser = function () {
+        var _this = this;
+        this.registerService.add(this.tempUser).subscribe(function (res) {
+            _this.successMsg = true;
+        });
+    };
     RegisterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'user-register',
-            templateUrl: '../views/partials/register.html'
+            templateUrl: '../views/partials/register.html',
+            styleUrls: ['../styles/css/login.css'],
+            providers: [user_register_service_1.UserRegisterService, http_interceptor_1.HttpInterceptor]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [user_register_service_1.UserRegisterService])
     ], RegisterComponent);
     return RegisterComponent;
 }());

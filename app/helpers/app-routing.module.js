@@ -10,22 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var assign_patient_component_1 = require('../components/assign-patient.component');
-var patient_component_1 = require('../components/patient.component');
-var location_component_1 = require('../components/location.component');
 var login_component_1 = require('../components/login.component');
 var register_component_1 = require('../components/register.component');
 var home_component_1 = require('../components/home.component');
 var routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: login_component_1.LoginComponent },
-    { path: 'register', component: register_component_1.RegisterComponent },
-    { path: 'home', component: home_component_1.HomeComponent,
+    //{ path: 'register', component: RegisterComponent },
+    { path: 'home/:username/:role', component: home_component_1.HomeComponent,
         children: [
-            { path: '', redirectTo: 'assign-patient', pathMatch: 'full' },
-            { path: 'assign-patient', component: assign_patient_component_1.AssignPatientComponent },
-            { path: 'patient', component: patient_component_1.PatientComponent },
-            { path: 'location', component: location_component_1.LocationComponent },
+            // { path: '', redirectTo: 'assign-patient', pathMatch: 'full' }
+            { path: 'user-register', component: register_component_1.RegisterComponent },
         ]
     }
 ];

@@ -9,17 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+require('rxjs/add/operator/switchMap');
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(route, router) {
+        this.route = route;
+        this.router = router;
+        this.sidebar = false;
     }
+    HomeComponent.prototype.ngOnInit = function () {
+        this.userName = this.route.params.value['username'];
+        this.userRole = this.route.params.value['role'];
+    };
+    HomeComponent.prototype.signOut = function () {
+        this.router.navigate(['login']);
+    };
     HomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-home',
             templateUrl: '../views/shared/home-layout.html',
-            styleUrls: ['../styles/css/_all-skins.css', '../styles/css/layout.css']
+            styleUrls: ['../styles/css/simple-sidebar.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router])
     ], HomeComponent);
     return HomeComponent;
 }());
